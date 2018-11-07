@@ -6,7 +6,7 @@ session = boto3.Session(profile_name='pythonAutomation')
 s3 = session.resource('s3')
 
 # Create bucket
-new_bucket = s3.create_bucket(Bucket='automatingawsmadux-newbucket', CreateBucketConfiguration={'LocationConstraint': session.region_name})
+new_bucket = s3.create_bucket(Bucket='automatingawsmadux', CreateBucketConfiguration={'LocationConstraint': session.region_name})
 
 # Upload index.html file
 new_bucket.upload_file('index.html', 'index.html', ExtraArgs={'ContentType': 'text/html'})  
@@ -30,11 +30,9 @@ policy = """
 
 # Then use the policy document to set the bucket policy
 
-   pol = new_bucket.Policy()
-   
-   policy = policy.strip() 
-
-   pol.put(Policy=policy)
+pol = new_bucket.Policy()
+policy = policy.strip() 
+pol.put(Policy=policy)
    
    
 # Set up website configuration on bucket
